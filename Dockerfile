@@ -7,6 +7,8 @@ WORKDIR /tmp
 ARG BITBUCKET_PASS
 ARG BITBUCKET_USER
 
+ADD image $DOCKER_HOME/
+
 # install meshio
 RUN apt-get update && \
     pip3 install -U meshio
@@ -28,3 +30,8 @@ RUN git clone --depth=1 https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.or
     python3 setup.py install
 
 RUN rm -rf /tmp/*
+
+RUN chown -R $DOCKER_USER:$DOCKER_GROUP $DOCKER_HOME
+
+WORKDIR $DOCKER_HOME
+USER root
