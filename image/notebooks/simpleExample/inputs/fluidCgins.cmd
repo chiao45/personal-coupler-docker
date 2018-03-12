@@ -33,7 +33,7 @@ $grid
       0. -9.8 0.
   done
   boundary conditions
-    all=noSlipWall
+    bcNumber1=noSlipWall, mixedDerivative(0.*t+1.*t.n=0.)
     # square(0,0)=outflow
     # square(0,1)=noSlipWall
     # square(1,1)=noSlipWall

@@ -4,7 +4,8 @@ $nu=.1; $kThermal=.3; $kappa=.1; $thermalExpansivity=.1; $degreeX=2; $degreeT=1;
 $tFinal=.1; $tPlot=.05;
 $ksp="bcgs"; $pc="bjacobi"; $subksp="preonly"; $subpc="ilu"; $iluLevels=1;
 $grid="inputs/fluid_quad2p.hdf";
-GetOptions( "g=s"=>\$grid,"tf=f"=>\$tFinal,"tp=f"=>\$tPlot,"degreeX=i"=>\$degreeX,"degreeT=i"=>\$degreeT );
+$show="outputs/fluid2p.show";
+GetOptions( "g=s"=>\$grid,"tf=f"=>\$tFinal,"tp=f"=>\$tPlot,"degreeX=i"=>\$degreeX,"degreeT=i"=>\$degreeT,"show=s"=>\$show );
 $grid
   incompressible Navier Stokes
   Boussinesq model
@@ -33,7 +34,7 @@ $grid
       0. -9.8 0.
   done
   boundary conditions
-    all=noSlipWall
+    bcNumber1=noSlipWall, mixedDerivative(0.*t+1.*t.n=0.)
     # square(0,0)=outflow
     # square(0,1)=noSlipWall
     # square(1,1)=noSlipWall
