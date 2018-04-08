@@ -1,1 +1,10 @@
 .ipynb_checkpoints
+*.pvd
+*.vtk
+*.vtu
+__pycache__
+*.log
+*.check
+*.debug
+*.move
+
