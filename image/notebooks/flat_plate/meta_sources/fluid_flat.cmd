@@ -10,7 +10,7 @@ create mappings
     lines
       30 30
     boundary conditions
-      1 0 2 3
+      1 0 2 2
   exit
   stretch coordinates
     stretch
@@ -30,7 +30,7 @@ create mappings
     lines
       40 30
     boundary conditions
-      0 0 3 3
+      0 0 3 2
   exit
   stretch coordinates
     stretch
@@ -50,7 +50,7 @@ create mappings
     lines
       30 20
     boundary conditions
-      0 4 3 3
+      0 4 3 2
   exit
   # the interface patch
   rectangle
@@ -61,7 +61,7 @@ create mappings
     mappingName
       INTERFACE
     boundary conditions
-      0 0 100 3
+      0 0 100 2
   exit
   stretch coordinates
     stretch

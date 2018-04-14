@@ -22,7 +22,8 @@ incompressible Navier Stokes
   define real parameter thermalExpansivity 0.0
   define real parameter adcBoussinesq 0.5
   continue
-  forward Euler
+  #forward Euler
+  implicit
   turn off twilight zone
   pde parameters
     nu $nu

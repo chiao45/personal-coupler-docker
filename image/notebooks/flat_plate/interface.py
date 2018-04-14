@@ -33,10 +33,9 @@ class DynamicUnderRelaxation(object):
         if bot <= 1e-24:
             self.omega = 1.0
         else:
-            self.omega = omega * \
-                abs(np.dot(idata.res_prev, idata.res - idata.res_prev) / bot)
-        if self.omega > 1.0:
-            self.omega = 1.0
+            self.omega = -omega * np.dot(idata.res_prev, idata.res - idata.res_prev) / bot
+#         if self.omega > 1.0:
+#             self.omega = 1.0
 
     def update_solution(self, idata):
         assert isinstance(idata, InterfaceData)
@@ -57,4 +56,17 @@ class RelativeCovergenceMonitor(object):
         if bot <= 1e-12:
             bot = 1.0
         err = np.linalg.norm(idata.res) / bot
+        return err <= self.tol
+    
+    
+class AbsCovergenceMonitor(object):
+    def __init__(self, tol, **kwargs):
+        if tol <= 0.0:
+            self.tol = 1e-6
+        else:
+            self.tol = tol
+
+    def determine_convergence(self, idata):
+        assert isinstance(idata, InterfaceData)
+        err = max(abs(idata.res))
         return err <= self.tol
