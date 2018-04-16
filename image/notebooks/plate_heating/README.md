@@ -1,4 +1,4 @@
-## Flow Over a Heated Plate
+## Heated Flow Over a Plate
 
 #### Problem Description
 
@@ -11,7 +11,7 @@ Simple testing problem--flat plate problem for *conjugate heat transfer* (CHT). 
   * kappa_f = kappa_s/k
   * U_inf = 0.1 m/s
   * L = 1m
-  * T_inf = 300K
+  * T_inf = 350K
 
 * Solid:
   * rho = 1
