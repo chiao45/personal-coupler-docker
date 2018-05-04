@@ -32,7 +32,7 @@ RUN git clone --depth=1 https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.or
 # lbcalculix
 RUN git clone --depth=1 https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.org/${BITBUCKET_USER}/libcalculix.git && \
     cd libcalculix && \
-    make -j2 && \
+    make && \
     make install
 
 # pyccx
