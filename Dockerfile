@@ -29,6 +29,17 @@ RUN git clone --depth=1 https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.or
     cd fesol && \
     python3 setup.py install
 
+# lbcalculix
+RUN git clone --depth=1 https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.org/${BITBUCKET_USER}/libcalculix.git && \
+    cd libcalculix && \
+    make -j2 && \
+    make install
+
+# pyccx
+RUN git clone --depth=1 https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.org/${BITBUCKET_USER}/pyccx.git && \
+    cd pyccx && \
+    python3 setup.py install
+
 RUN rm -rf /tmp/*
 
 RUN chown -R $DOCKER_USER:$DOCKER_GROUP $DOCKER_HOME
