@@ -1,0 +1,53 @@
+*INCLUDE,INPUT=solid/mesh.common 
+*INCLUDE,INPUT=solid/interface.common 
+*INCLUDE,INPUT=solid/fixedT.common 
+*INCLUDE,INPUT=solid/inodes.common 
+
+** define a material
+*MATERIAL, NAME=Copper
+*DENSITY
+1.0
+*CONDUCTIVITY
+3.0
+*SPECIFIC HEAT
+3.0
+
+*INITIAL CONDITIONS,TYPE=TEMPERATURE
+Nall,600.0
+
+** plugin material
+*SOLID SECTION, ELSET=Eall, MATERIAL=Copper
+
+** Fixed boundary condition outside of steps
+*BOUNDARY
+Bottom,11,11,600.0
+
+** use nlgeom solver
+** super large increments to ensure that CalculiX will not terminate the process
+** HEAT TRANSFER (ithermal==2) must be used, for thermal mach, use
+** coupled thermal displacements... (ithermal==3) or uncoupled (ithermal==4)
+** for this work, only ithermal==2 can be employed.
+** we use 0.01s fixed step sizes (DIRECT), with local final time 50s.
+** This, however, can be controled by PyCCX
+*STEP, NLGEOM, INC=2000000000
+*HEAT TRANSFER, DIRECT
+0.05,50.0
+
+***********************************************************
+** Fixed temperature constraint applied
+** written by write_constraints_temperature function
+** FemConstraintTemperature
+
+** include our default 4 natural walls
+*INCLUDE,INPUT=solid/dflux.common 
+
+** include our interface condition
+*INCLUDE,INPUT=solid/iflux.interface
+
+** FRD output controls, FILE indicates FRD output, there is another option
+** PRINT, which will dump solutions into DAT files. FREQUENCY indicates
+** that we write solutions every 50 increments. NT for nodal temperatures
+*NODE FILE,FREQUENCY=50
+NT
+
+*END STEP 
