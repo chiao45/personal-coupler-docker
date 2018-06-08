@@ -1,13 +1,13 @@
-$Kappa=0.06808;
+$Kappa=5.0;
 $solver="choose best iterative solver";
 $rtol=1e-8;
 $atol=1e-10;
 $U_in=3.0;
-$T_in=1000.0;
-$fluidDensity=0.3525;
-$nu=0.0001120567;
-$Pr=0.6629;
-$Alpha=0.0001690401;
+$T_in=350.0;
+$fluidDensity=1.0;
+$nu=0.0002;
+$Pr=0.01;
+$Alpha=0.02;
 $grid="fluid/fluid_flat.hdf";
 #
 $grid
@@ -35,7 +35,7 @@ incompressible Navier Stokes
   boundary conditions
     bcNumber1=inflowWithVelocityGiven, uniform(u=$U_in,v=0.0,w=0.0,T=$T_in)
     bcNumber4=outflow, pressure(0.*p+1.*p.n=0.0), mixedDerivative(0.*t+1.*t.n=0.)
-    bcNumber2=slipWall, mixedDerivative(1.*t+0.*t.n=$T_in)
+    bcNumber2=slipWall, mixedDerivative(0.*t+1.*t.n=0.)
     bcNumber3=noSlipWall, mixedDerivative(0.*t+1.*t.n=0.)
     # do this for now... there is a bug in Overture CGINS implicit.C setting symmetric bc
     bcNumber99=slipWall, mixedDerivative(0.*t+1.*t.n=0.)

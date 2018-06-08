@@ -1,13 +1,13 @@
-$Kappa=0.06808;
+$Kappa=5.0;
 $solver="choose best iterative solver";
 $rtol=1e-8;
 $atol=1e-10;
 $U_in=3.0;
-$T_in=1000.0;
-$fluidDensity=0.3525;
-$nu=0.0001120567;
-$Pr=0.6629;
-$Alpha=0.0001690401;
+$T_in=350.0;
+$fluidDensity=1.0;
+$nu=0.0002;
+$Pr=0.01;
+$Alpha=0.02;
 $grid="fluid/fluid_flat.hdf";
 #
 $grid

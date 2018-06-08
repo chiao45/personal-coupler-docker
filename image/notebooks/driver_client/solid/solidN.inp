@@ -8,19 +8,19 @@
 *DENSITY
 1.0
 *CONDUCTIVITY
-3.0
+100.0
 *SPECIFIC HEAT
-3.0
+100.0
 
 *INITIAL CONDITIONS,TYPE=TEMPERATURE
-Nall,600.0
+Nall,300.0
 
 ** plugin material
 *SOLID SECTION, ELSET=Eall, MATERIAL=Copper
 
 ** Fixed boundary condition outside of steps
 *BOUNDARY
-Bottom,11,11,600.0
+Bottom,11,11,300.0
 
 ** use nlgeom solver
 ** super large increments to ensure that CalculiX will not terminate the process
