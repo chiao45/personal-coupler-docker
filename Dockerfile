@@ -6,27 +6,25 @@ WORKDIR $DOCKER_HOME
 ARG BITBUCKET_PASS
 ARG BITBUCKET_USER
 
-ADD image $DOCKER_HOME/
-
 # install meshio
 RUN apt-get update && \
     pip3 install -U meshio
 
 # pyoverture
-RUN git clone --depth=1 https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.org/${BITBUCKET_USER}/pyovcg.git
+RUN git clone --depth=1 https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.org/${BITBUCKET_USER}/pyovcg.git ./apps/pyovcg
 
 # pydtk2
 # make sure add env CC=mpicxx
-RUN git clone --depth=1 https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.org/${BITBUCKET_USER}/pydtk2.git
+RUN git clone --depth=1 https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.org/${BITBUCKET_USER}/pydtk2.git ./apps/pydtk2
 
 # fem solver
-RUN git clone --depth=1 https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.org/${BITBUCKET_USER}/fesol.git
+RUN git clone --depth=1 https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.org/${BITBUCKET_USER}/fesol.git ./apps/fesol
 
 # lbcalculix
-RUN git clone --depth=1 https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.org/${BITBUCKET_USER}/libcalculix.git
+RUN git clone --depth=1 https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.org/${BITBUCKET_USER}/libcalculix.git ./apps/libcalculix
 
 # pyccx
-RUN git clone --depth=1 https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.org/${BITBUCKET_USER}/pyccx.git
+RUN git clone --depth=1 https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.org/${BITBUCKET_USER}/pyccx.git ./apps/pyccx
 
 RUN chown -R $DOCKER_USER:$DOCKER_GROUP $DOCKER_HOME
 
@@ -40,11 +38,8 @@ LABEL maintainer "Qiao Chen <benechiao@gmail.com>"
 USER root
 WORKDIR /tmp
 
-COPY --from=base $DOCKER_HOME/pyovcg /tmp/
-COPY --from=base $DOCKER_HOME/pydtk2 /tmp/
-COPY --from=base $DOCKER_HOME/fesol /tmp/
-COPY --from=base $DOCKER_HOME/libcalculix /tmp/
-COPY --from=base $DOCKER_HOME/pyccx /tmp/
+COPY --from=base $DOCKER_HOME/apps .
+ADD image $DOCKER_HOME/
 
 RUN cd pyovcg && python3 setup.py install
 RUN cd pydtk2 && env CC=mpicxx python3 setup.py install
