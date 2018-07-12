@@ -40,11 +40,11 @@ LABEL maintainer "Qiao Chen <benechiao@gmail.com>"
 USER root
 WORKDIR /tmp
 
-COPY --from=base $DOCKER_HOME/pyovcg .
-COPY --from=base $DOCKER_HOME/pydtk2 .
-COPY --from=base $DOCKER_HOME/fesol .
-COPY --from=base $DOCKER_HOME/libcalculix .
-COPY --from=base $DOCKER_HOME/pyccx .
+COPY --from=base $DOCKER_HOME/pyovcg /tmp/
+COPY --from=base $DOCKER_HOME/pydtk2 /tmp/
+COPY --from=base $DOCKER_HOME/fesol /tmp/
+COPY --from=base $DOCKER_HOME/libcalculix /tmp/
+COPY --from=base $DOCKER_HOME/pyccx /tmp/
 
 RUN cd pyovcg && python3 setup.py install
 RUN cd pydtk2 && env CC=mpicxx python3 setup.py install
